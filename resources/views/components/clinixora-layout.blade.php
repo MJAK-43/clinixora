@@ -23,7 +23,7 @@
     </style>
 </head>
 <body
-    class="min-h-screen bg-[#F8FAFC] text-slate-900 antialiased"
+    class="min-h-screen overflow-x-hidden bg-[#F8FAFC] text-slate-900 antialiased"
     x-data="{
         widgetDefs: {{ \Illuminate\Support\Js::from($customizeWidgets) }},
         widgets: {{ \Illuminate\Support\Js::from($widgetsInitial) }},
@@ -60,7 +60,7 @@
     }"
     x-init="init()"
 >
-    <div class="flex min-h-screen flex-col sm:flex-row">
+    <div class="flex min-h-screen w-full flex-col overflow-x-hidden sm:flex-row">
         <header class="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 sm:hidden">
             <button
                 type="button"
@@ -91,7 +91,7 @@
             x-transition:leave="transition ease-in duration-150"
             x-transition:leave-start="translate-x-0"
             x-transition:leave-end="-translate-x-full"
-            class="fixed inset-y-0 left-0 z-50 w-[85vw] max-w-sm transform sm:hidden"
+            class="fixed inset-y-0 left-0 z-50 w-[85vw] max-w-sm transform overflow-y-auto sm:hidden"
         >
             <div class="flex h-full flex-col bg-[#0A192F]">
                 <div class="flex justify-end p-3">
@@ -99,7 +99,7 @@
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                 </div>
-                <div class="min-h-0 flex-1 overflow-y-auto">
+                <div class="min-h-0 flex-1">
                     @include('partials.clinixora-sidebar')
                 </div>
             </div>

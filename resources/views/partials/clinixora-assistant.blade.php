@@ -55,7 +55,8 @@
     type="button"
     x-show="widgets['assistant_panel'] && isCompactScreen"
     x-cloak
-    class="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-sky-500 text-white shadow-lg hover:bg-sky-600"
+    class="fixed z-40 flex h-12 w-12 items-center justify-center rounded-full bg-sky-500 text-white shadow-lg hover:bg-sky-600"
+    style="right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));"
     @click="assistantModalOpen = true"
     title="Ouvrir l’assistant"
 >

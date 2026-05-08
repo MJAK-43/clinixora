@@ -18,7 +18,7 @@
 @endphp
 
 <aside
-    class="flex w-full shrink-0 flex-col border-slate-800/80 bg-[#0A192F] text-slate-200 transition-all duration-200 sm:border-r"
+    class="flex h-full w-full shrink-0 flex-col border-slate-800/80 bg-[#0A192F] text-slate-200 transition-all duration-200 sm:border-r"
     :class="desktopSidebarCollapsed ? 'sm:w-20' : 'sm:w-64'"
 >
     <div class="flex items-center gap-3 px-5 py-6" :class="desktopSidebarCollapsed ? 'sm:justify-center sm:px-2' : ''">
