@@ -11,7 +11,7 @@
     :customize-widgets="$customizeWidgets"
     :assistant-messages="$assistantMessages"
 >
-    <div class="min-w-0 flex-1 overflow-y-auto px-4 py-6 sm:px-6 lg:px-8">
+    <div class="min-w-0 flex-1 overflow-y-auto bg-[#F1F5F9] px-4 py-6 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-6xl">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <h1 class="text-2xl font-bold tracking-tight text-slate-900">Tableau de bord</h1>
@@ -73,7 +73,7 @@
                                     $x = $nAct === 1 ? 200 : ($i / ($nAct - 1)) * 400;
                                     $y = 160 - (($v - $minAct) / $rangeAct) * 160;
                                 @endphp
-                                <circle cx="{{ $x }}" cy="{{ $y }}" r="5" fill="#0ea5e9" stroke="#e0f2fe" stroke-width="2" />
+                                <circle cx="{{ $x }}" cy="{{ $y }}" r="5" fill="#010f2e" stroke="#e0f2fe" stroke-width="2" />
                             @endforeach
                         </svg>
                         <div class="mt-2 flex justify-between text-[11px] font-medium text-slate-400">

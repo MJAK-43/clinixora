@@ -18,23 +18,20 @@
 @endphp
 
 <aside
-    class="flex h-full w-full shrink-0 flex-col border-slate-800/80 bg-[#0A192F] text-slate-200 transition-all duration-200 sm:border-r"
+    class="flex h-full w-full shrink-0 flex-col border-[#15327a] bg-[#010f2e] text-slate-200 transition-all duration-200 sm:border-r"
     :class="desktopSidebarCollapsed ? 'sm:w-20' : 'sm:w-64'"
+    style="background-color: #010f2e;"
 >
-    <div class="flex items-center gap-3 px-5 py-6" :class="desktopSidebarCollapsed ? 'sm:justify-center sm:px-2' : ''">
-        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-500 shadow-lg shadow-sky-500/20">
-            <svg class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 2L4 6v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V6l-8-4z" fill="currentColor" opacity=".25"/>
-                <path d="M12 6v8M9 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-        </div>
-        <div class="min-w-0" :class="desktopSidebarCollapsed ? 'sm:hidden' : ''">
-            <div class="truncate font-semibold tracking-tight text-white">CliniXora</div>
-            <div class="text-xs text-slate-400">SaaS médical</div>
-        </div>
+    <div class="relative flex items-center justify-center px-4 py-5" :class="desktopSidebarCollapsed ? 'sm:px-2' : ''">
+        <img
+            src="{{ asset('images/logo_blue.png') }}"
+            alt="CliniXora"
+            class="h-20 w-auto max-w-[11rem] shrink-0 rounded-xl p-1.5 object-contain sm:h-[5.25rem] sm:max-w-[12rem]"
+            :class="desktopSidebarCollapsed ? 'sm:h-12 sm:w-12 sm:max-w-[3rem] sm:p-1' : ''"
+        >
         <button
             type="button"
-            class="ml-auto hidden rounded p-1.5 text-slate-400 hover:bg-white/10 hover:text-white sm:inline-flex"
+            class="absolute right-3 hidden rounded p-1.5 text-slate-400 hover:bg-white/10 hover:text-white sm:inline-flex"
             :title="desktopSidebarCollapsed ? 'Déplier le menu' : 'Replier le menu'"
             @click="toggleSidebar()"
             :aria-label="desktopSidebarCollapsed ? 'Déplier le menu latéral' : 'Replier le menu latéral'"

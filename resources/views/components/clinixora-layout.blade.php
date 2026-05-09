@@ -6,6 +6,19 @@
 
 @php
     $widgetsInitial = collect($customizeWidgets)->mapWithKeys(fn ($w) => [$w['id'] => $w['default']])->all();
+    $assistantNudgeMessages = [
+        'Bonjour '.auth()->user()->name.' 👋, comment puis-je vous aider ?',
+        'Besoin d\'un résumé rapide des consultations du jour ?',
+        'Je peux vous aider à retrouver un patient en quelques secondes.',
+        'Vous voulez un point rapide sur les encaissements de la journée ?',
+        'Je peux préparer un récapitulatif des rendez-vous à venir.',
+        'Je peux vous aider à identifier les modules à prioriser aujourd\'hui.',
+        'Besoin d\'une synthèse des statistiques clés de la clinique ?',
+        'Je peux vous guider pas à pas sur un module si besoin.',
+        'Vous cherchez une information précise sur le dashboard ?',
+        'Je peux vous proposer des actions rapides adaptées à votre rôle.',
+        'Dites-moi ce que vous voulez voir, je vous aide tout de suite.',
+    ];
 @endphp
 
 <!DOCTYPE html>
@@ -20,32 +33,74 @@
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
     <style>
         body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+        .welcome-bubble-attention {
+            animation: bubbleFloat 2.2s ease-in-out infinite;
+        }
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
     </style>
 </head>
 <body
-    class="min-h-screen overflow-x-hidden bg-[#F8FAFC] text-slate-900 antialiased"
+    class="min-h-screen overflow-x-hidden bg-[#010f2e] text-slate-900 antialiased"
     x-data="{
         widgetDefs: {{ \Illuminate\Support\Js::from($customizeWidgets) }},
         widgets: {{ \Illuminate\Support\Js::from($widgetsInitial) }},
-        assistantOpen: true,
-        assistantModalOpen: false,
+        assistantOpen: false,
         customizeOpen: false,
         modulesPopover: false,
         mobileNavOpen: false,
         desktopSidebarCollapsed: false,
-        isCompactScreen: false,
+        isCompactScreen: window.matchMedia('(max-width: 1279px)').matches,
+        assistantNudgeMessages: {{ \Illuminate\Support\Js::from($assistantNudgeMessages) }},
+        assistantNudgeIndex: 0,
+        assistantNudgeIntervalMs: 600000,
+        welcomeBubbleVisible: false,
+        welcomeBubbleShowTimer: null,
+        welcomeBubbleRotateTimer: null,
+        get currentNudgeMessage() {
+            return this.assistantNudgeMessages[this.assistantNudgeIndex] ?? '';
+        },
         updateViewportFlags() {
-            this.isCompactScreen = window.innerWidth < 1024;
+            this.isCompactScreen = window.matchMedia('(max-width: 1279px)').matches;
             if (!this.isCompactScreen) {
-                this.assistantModalOpen = false;
                 this.mobileNavOpen = false;
             }
+            this.showWelcomeBubbleIfNeeded();
+        },
+        showWelcomeBubbleIfNeeded() {
+            if (this.widgets['assistant_panel'] === false) {
+                this.welcomeBubbleVisible = false;
+                return;
+            }
+            this.welcomeBubbleVisible = !this.assistantOpen;
+        },
+        startNudgeRotation() {
+            if (this.welcomeBubbleRotateTimer) {
+                window.clearInterval(this.welcomeBubbleRotateTimer);
+            }
+            this.welcomeBubbleRotateTimer = window.setInterval(() => {
+                this.assistantNudgeIndex = (this.assistantNudgeIndex + 1) % this.assistantNudgeMessages.length;
+                this.showWelcomeBubbleIfNeeded();
+            }, this.assistantNudgeIntervalMs);
+        },
+        dismissWelcomeBubble() {
+            this.welcomeBubbleVisible = false;
+            window.sessionStorage.setItem('clinixora.assistant.welcome.dismissed', '1');
         },
         init() {
             const saved = window.localStorage.getItem('clinixora.sidebar.collapsed');
             this.desktopSidebarCollapsed = saved === '1';
             this.updateViewportFlags();
             window.addEventListener('resize', () => this.updateViewportFlags());
+            const dismissed = window.sessionStorage.getItem('clinixora.assistant.welcome.dismissed') === '1';
+            if (!dismissed) {
+                this.welcomeBubbleShowTimer = window.setTimeout(() => {
+                    this.showWelcomeBubbleIfNeeded();
+                }, 2000);
+                this.startNudgeRotation();
+            }
         },
         toggleSidebar() {
             this.desktopSidebarCollapsed = !this.desktopSidebarCollapsed;
@@ -93,7 +148,7 @@
             x-transition:leave-end="-translate-x-full"
             class="fixed inset-y-0 left-0 z-50 w-[85vw] max-w-sm transform overflow-y-auto sm:hidden"
         >
-            <div class="flex h-full flex-col bg-[#0A192F]">
+            <div class="flex h-full flex-col bg-[#010f2e]" style="background-color: #010f2e;">
                 <div class="flex justify-end p-3">
                     <button type="button" class="rounded p-2 text-slate-300 hover:bg-white/10 hover:text-white" @click="mobileNavOpen = false" aria-label="Fermer le menu">
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -109,13 +164,13 @@
             @include('partials.clinixora-sidebar')
         </div>
 
-        <div class="flex min-h-0 min-w-0 flex-1 flex-col sm:flex-row">
-            <div class="min-h-0 min-w-0 flex-1">
+        <div class="flex min-h-0 min-w-0 flex-1 flex-col">
+            <div class="min-h-0 min-w-0 flex-1 bg-[#010f2e]">
                 {{ $slot }}
             </div>
-
-            @include('partials.clinixora-assistant', ['assistantMessages' => $assistantMessages])
         </div>
+
+        @include('partials.clinixora-assistant', ['assistantMessages' => $assistantMessages])
     </div>
 
     <div
