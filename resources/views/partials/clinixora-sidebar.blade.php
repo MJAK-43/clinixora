@@ -13,7 +13,7 @@
         ['route' => null, 'href' => '#', 'label' => 'Stock', 'icon' => 'cube', 'badge' => null],
         ['route' => null, 'href' => '#', 'label' => 'Messagerie', 'icon' => 'chat', 'badge' => 3],
         ['route' => null, 'href' => '#', 'label' => 'Rapports', 'icon' => 'chart', 'badge' => null],
-        ['route' => null, 'href' => '#', 'label' => 'Paramètres', 'icon' => 'cog', 'badge' => null],
+        ['route' => 'parametres', 'href' => null, 'label' => 'Paramètres', 'icon' => 'cog', 'badge' => null],
     ];
 @endphp
 

@@ -44,4 +44,25 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role_id' => Role::query()->where('slug', 'admin')->first()?->id,
+        ]);
+    }
+
+    public function secretary(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role_id' => Role::query()->where('slug', 'secretary')->first()?->id,
+        ]);
+    }
+
+    public function director(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role_id' => Role::query()->where('slug', 'director')->first()?->id,
+        ]);
+    }
 }

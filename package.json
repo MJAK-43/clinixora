@@ -5,7 +5,9 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "qa:screenshot:dashboard": "node scripts/capture-dashboard-screenshots.mjs"
+        "qa:screenshot:dashboard": "node scripts/capture-dashboard-screenshots.mjs",
+        "qa:screenshot:parametres": "node scripts/capture-parametres-screenshots.mjs",
+        "qa:screenshot:geography": "node scripts/capture-geography-screenshots.mjs"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
