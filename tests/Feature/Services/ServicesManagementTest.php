@@ -29,7 +29,7 @@ class ServicesManagementTest extends TestCase
             ->assertOk()
             ->assertSee('Services', false)
             ->assertSee('Consultation générale', false)
-            ->assertSee('Liste des services (28)', false);
+            ->assertSee('Liste des services (29)', false);
     }
 
     public function test_secretary_cannot_access_services_page(): void

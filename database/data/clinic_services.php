@@ -10,6 +10,7 @@ return [
     ['name' => 'Consultation spécialisée', 'code' => 'CSPE', 'description' => 'Consultation avec un praticien spécialiste', 'icon' => 'briefcase', 'is_active' => true],
     ['name' => 'Hospitalisation', 'code' => 'HOSP', 'description' => 'Prise en charge en service d’hospitalisation', 'icon' => 'bed', 'is_active' => true],
     ['name' => 'Urgences', 'code' => 'URG', 'description' => 'Accueil et soins en service d’urgences', 'icon' => 'syringe', 'is_active' => true],
+    ['name' => 'Chirurgie générale', 'code' => 'CHIR', 'description' => 'Interventions chirurgicales en salle d’opération', 'icon' => 'scalpel', 'is_active' => true],
     ['name' => 'Chirurgie ambulatoire', 'code' => 'CHAM', 'description' => 'Interventions chirurgicales sans hospitalisation prolongée', 'icon' => 'scalpel', 'is_active' => true],
     ['name' => 'Bloc opératoire', 'code' => 'BLOC', 'description' => 'Interventions en salle d’opération', 'icon' => 'scalpel', 'is_active' => true],
     ['name' => 'Réanimation', 'code' => 'REA', 'description' => 'Soins intensifs et surveillance continue', 'icon' => 'heart', 'is_active' => true],

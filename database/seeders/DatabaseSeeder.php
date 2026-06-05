@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             GeographySeeder::class,
             SpecialtySeeder::class,
             ServiceSeeder::class,
+            OperatingBlockSeeder::class,
+            CareRoomSeeder::class,
+            ReceptionRoomSeeder::class,
             AgentActionSeeder::class,
         ]);
     }

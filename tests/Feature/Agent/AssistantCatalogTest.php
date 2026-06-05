@@ -40,7 +40,7 @@ class AssistantCatalogTest extends TestCase
             ]);
 
         $modules = $response->json('modules');
-        $this->assertCount(3, $modules);
+        $this->assertCount(6, $modules);
 
         $geography = collect($modules)->firstWhere('key', 'geography');
         $this->assertNotNull($geography);
@@ -56,6 +56,21 @@ class AssistantCatalogTest extends TestCase
         $this->assertNotNull($services);
         $this->assertSame('Services', $services['label']);
         $this->assertCount(5, $services['actions']);
+
+        $operatingBlocks = collect($modules)->firstWhere('key', 'operating_blocks');
+        $this->assertNotNull($operatingBlocks);
+        $this->assertSame('Blocs opératoires', $operatingBlocks['label']);
+        $this->assertCount(5, $operatingBlocks['actions']);
+
+        $careRooms = collect($modules)->firstWhere('key', 'care_rooms');
+        $this->assertNotNull($careRooms);
+        $this->assertSame('Salles de soin', $careRooms['label']);
+        $this->assertCount(5, $careRooms['actions']);
+
+        $receptionRooms = collect($modules)->firstWhere('key', 'reception_rooms');
+        $this->assertNotNull($receptionRooms);
+        $this->assertSame('Salles d’accueil', $receptionRooms['label']);
+        $this->assertCount(5, $receptionRooms['actions']);
 
         $listCities = collect($geography['actions'])->firstWhere('action_key', 'geography.list_cities');
         $this->assertNotNull($listCities);

@@ -17,6 +17,21 @@ use App\Domain\Agent\Handlers\Geography\SearchDistrictsHandler;
 use App\Domain\Agent\Handlers\Geography\UpdateCityHandler;
 use App\Domain\Agent\Handlers\Geography\UpdateCountryHandler;
 use App\Domain\Agent\Handlers\Geography\UpdateDistrictHandler;
+use App\Domain\Agent\Handlers\CareRooms\CreateCareRoomHandler;
+use App\Domain\Agent\Handlers\CareRooms\DeleteCareRoomHandler;
+use App\Domain\Agent\Handlers\CareRooms\ListCareRoomsHandler;
+use App\Domain\Agent\Handlers\CareRooms\SearchCareRoomsHandler;
+use App\Domain\Agent\Handlers\CareRooms\UpdateCareRoomHandler;
+use App\Domain\Agent\Handlers\OperatingBlocks\CreateOperatingBlockHandler;
+use App\Domain\Agent\Handlers\OperatingBlocks\DeleteOperatingBlockHandler;
+use App\Domain\Agent\Handlers\OperatingBlocks\ListOperatingBlocksHandler;
+use App\Domain\Agent\Handlers\OperatingBlocks\SearchOperatingBlocksHandler;
+use App\Domain\Agent\Handlers\OperatingBlocks\UpdateOperatingBlockHandler;
+use App\Domain\Agent\Handlers\ReceptionRooms\CreateReceptionRoomHandler;
+use App\Domain\Agent\Handlers\ReceptionRooms\DeleteReceptionRoomHandler;
+use App\Domain\Agent\Handlers\ReceptionRooms\ListReceptionRoomsHandler;
+use App\Domain\Agent\Handlers\ReceptionRooms\SearchReceptionRoomsHandler;
+use App\Domain\Agent\Handlers\ReceptionRooms\UpdateReceptionRoomHandler;
 use App\Domain\Agent\Handlers\Services\CreateServiceHandler;
 use App\Domain\Agent\Handlers\Services\DeleteServiceHandler;
 use App\Domain\Agent\Handlers\Services\ListServicesHandler;
@@ -65,6 +80,24 @@ class AgentActionSeeder extends Seeder
             ['action_key' => UpdateServiceHandler::ACTION_KEY, 'module' => 'services', 'label' => 'Modifier un service', 'description' => 'Met à jour nom et code d’un service.', 'risk_level' => 'medium', 'requires_confirmation' => true, 'handler_class' => UpdateServiceHandler::class],
             ['action_key' => DeleteServiceHandler::ACTION_KEY, 'module' => 'services', 'label' => 'Supprimer un service', 'description' => 'Supprime un service.', 'risk_level' => 'high', 'requires_confirmation' => true, 'handler_class' => DeleteServiceHandler::class],
             ['action_key' => SearchServicesHandler::ACTION_KEY, 'module' => 'services', 'label' => 'Rechercher un service', 'description' => 'Trouve un service par nom ou code.', 'risk_level' => 'low', 'requires_confirmation' => false, 'handler_class' => SearchServicesHandler::class],
+            // Blocs opératoires
+            ['action_key' => ListOperatingBlocksHandler::ACTION_KEY, 'module' => 'operating_blocks', 'label' => 'Lister les blocs opératoires', 'description' => 'Affiche tous les blocs opératoires.', 'risk_level' => 'low', 'requires_confirmation' => false, 'handler_class' => ListOperatingBlocksHandler::class],
+            ['action_key' => CreateOperatingBlockHandler::ACTION_KEY, 'module' => 'operating_blocks', 'label' => 'Créer un bloc opératoire', 'description' => 'Ajoute un nouveau bloc opératoire.', 'risk_level' => 'medium', 'requires_confirmation' => true, 'handler_class' => CreateOperatingBlockHandler::class],
+            ['action_key' => UpdateOperatingBlockHandler::ACTION_KEY, 'module' => 'operating_blocks', 'label' => 'Modifier un bloc opératoire', 'description' => 'Met à jour un bloc opératoire.', 'risk_level' => 'medium', 'requires_confirmation' => true, 'handler_class' => UpdateOperatingBlockHandler::class],
+            ['action_key' => DeleteOperatingBlockHandler::ACTION_KEY, 'module' => 'operating_blocks', 'label' => 'Supprimer un bloc opératoire', 'description' => 'Supprime un bloc opératoire.', 'risk_level' => 'high', 'requires_confirmation' => true, 'handler_class' => DeleteOperatingBlockHandler::class],
+            ['action_key' => SearchOperatingBlocksHandler::ACTION_KEY, 'module' => 'operating_blocks', 'label' => 'Rechercher un bloc opératoire', 'description' => 'Trouve un bloc par nom ou code.', 'risk_level' => 'low', 'requires_confirmation' => false, 'handler_class' => SearchOperatingBlocksHandler::class],
+            // Salles de soin
+            ['action_key' => ListCareRoomsHandler::ACTION_KEY, 'module' => 'care_rooms', 'label' => 'Lister les salles de soin', 'description' => 'Affiche toutes les salles de soin.', 'risk_level' => 'low', 'requires_confirmation' => false, 'handler_class' => ListCareRoomsHandler::class],
+            ['action_key' => CreateCareRoomHandler::ACTION_KEY, 'module' => 'care_rooms', 'label' => 'Créer une salle de soin', 'description' => 'Ajoute une nouvelle salle de soin.', 'risk_level' => 'medium', 'requires_confirmation' => true, 'handler_class' => CreateCareRoomHandler::class],
+            ['action_key' => UpdateCareRoomHandler::ACTION_KEY, 'module' => 'care_rooms', 'label' => 'Modifier une salle de soin', 'description' => 'Met à jour une salle de soin.', 'risk_level' => 'medium', 'requires_confirmation' => true, 'handler_class' => UpdateCareRoomHandler::class],
+            ['action_key' => DeleteCareRoomHandler::ACTION_KEY, 'module' => 'care_rooms', 'label' => 'Supprimer une salle de soin', 'description' => 'Supprime une salle de soin.', 'risk_level' => 'high', 'requires_confirmation' => true, 'handler_class' => DeleteCareRoomHandler::class],
+            ['action_key' => SearchCareRoomsHandler::ACTION_KEY, 'module' => 'care_rooms', 'label' => 'Rechercher une salle de soin', 'description' => 'Trouve une salle par nom ou code.', 'risk_level' => 'low', 'requires_confirmation' => false, 'handler_class' => SearchCareRoomsHandler::class],
+            // Salles d'accueil
+            ['action_key' => ListReceptionRoomsHandler::ACTION_KEY, 'module' => 'reception_rooms', 'label' => 'Lister les salles d\'accueil', 'description' => 'Affiche toutes les salles d\'accueil.', 'risk_level' => 'low', 'requires_confirmation' => false, 'handler_class' => ListReceptionRoomsHandler::class],
+            ['action_key' => CreateReceptionRoomHandler::ACTION_KEY, 'module' => 'reception_rooms', 'label' => 'Créer une salle d\'accueil', 'description' => 'Ajoute une nouvelle salle d\'accueil.', 'risk_level' => 'medium', 'requires_confirmation' => true, 'handler_class' => CreateReceptionRoomHandler::class],
+            ['action_key' => UpdateReceptionRoomHandler::ACTION_KEY, 'module' => 'reception_rooms', 'label' => 'Modifier une salle d\'accueil', 'description' => 'Met à jour une salle d\'accueil.', 'risk_level' => 'medium', 'requires_confirmation' => true, 'handler_class' => UpdateReceptionRoomHandler::class],
+            ['action_key' => DeleteReceptionRoomHandler::ACTION_KEY, 'module' => 'reception_rooms', 'label' => 'Supprimer une salle d\'accueil', 'description' => 'Supprime une salle d\'accueil.', 'risk_level' => 'high', 'requires_confirmation' => true, 'handler_class' => DeleteReceptionRoomHandler::class],
+            ['action_key' => SearchReceptionRoomsHandler::ACTION_KEY, 'module' => 'reception_rooms', 'label' => 'Rechercher une salle d\'accueil', 'description' => 'Trouve une salle par nom ou code.', 'risk_level' => 'low', 'requires_confirmation' => false, 'handler_class' => SearchReceptionRoomsHandler::class],
         ];
 
         foreach ($actions as $attrs) {

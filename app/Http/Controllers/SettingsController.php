@@ -18,7 +18,7 @@ class SettingsController extends Controller
                 ['title' => 'Utilisateurs', 'description' => 'Gérer les accès et rôles', 'href' => '#', 'icon' => 'users', 'iconTile' => 'bg-sky-100 text-sky-600'],
                 ['title' => 'Services', 'description' => 'Gérer les services', 'href' => route('services.index'), 'icon' => 'briefcase', 'iconTile' => 'bg-emerald-100 text-emerald-600'],
                 ['title' => 'Spécialités', 'description' => 'Gérer les spécialités', 'href' => route('specialties.index'), 'icon' => 'stethoscope', 'iconTile' => 'bg-violet-100 text-violet-600'],
-                ['title' => 'Salle de soin', 'description' => 'Gérer les salles', 'href' => '#', 'icon' => 'bed', 'iconTile' => 'bg-orange-100 text-orange-600'],
+                ['title' => 'Salle de soin', 'description' => 'Gérer les salles', 'href' => route('care_rooms.index'), 'icon' => 'bed', 'iconTile' => 'bg-orange-100 text-orange-600'],
                 ['title' => 'Mode de paiement', 'description' => 'Gérer les modes', 'href' => '#', 'icon' => 'credit', 'iconTile' => 'bg-sky-100 text-sky-600'],
             ],
             'categories' => [
@@ -29,9 +29,9 @@ class SettingsController extends Controller
                     'links' => [
                         ['label' => 'Services', 'href' => route('services.index')],
                         ['label' => 'Spécialités', 'href' => route('specialties.index')],
-                        'Bloc opératoire',
-                        'Salles de soin',
-                        'Salles d\'accueil',
+                        ['label' => 'Bloc opératoire', 'href' => route('operating_blocks.index')],
+                        ['label' => 'Salles de soin', 'href' => route('care_rooms.index')],
+                        ['label' => 'Salles d\'accueil', 'href' => route('reception_rooms.index')],
                     ],
                 ],
                 [

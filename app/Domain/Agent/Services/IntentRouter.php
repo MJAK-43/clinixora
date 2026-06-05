@@ -8,6 +8,9 @@ class IntentRouter
         private readonly GeographyIntentMatcher $geography,
         private readonly SpecialtiesIntentMatcher $specialties,
         private readonly ClinicServicesIntentMatcher $services,
+        private readonly OperatingBlocksIntentMatcher $operatingBlocks,
+        private readonly CareRoomsIntentMatcher $careRooms,
+        private readonly ReceptionRoomsIntentMatcher $receptionRooms,
     ) {}
 
     /**
@@ -27,7 +30,10 @@ class IntentRouter
 
         return $this->geography->match($text)
             ?? $this->specialties->match($text)
-            ?? $this->services->match($text);
+            ?? $this->services->match($text)
+            ?? $this->operatingBlocks->match($text)
+            ?? $this->careRooms->match($text)
+            ?? $this->receptionRooms->match($text);
     }
 
     private function isHelpRequest(string $text): bool
