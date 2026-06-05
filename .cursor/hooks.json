@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "command": "php .cursor/hooks/mark-session-modified.php",
+        "matcher": "Write|StrReplace"
+      }
+    ],
+    "stop": [
+      {
+        "command": "php .cursor/hooks/prompt-qa-on-stop.php",
+        "loop_limit": 1
+      }
+    ]
+  }
+}

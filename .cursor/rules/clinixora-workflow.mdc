@@ -1,0 +1,34 @@
+---
+description: Protocole avant/après chaque modification Clinixora
+alwaysApply: true
+---
+
+# Protocole de modification Clinixora
+
+## Avant de coder
+1. Identifier le **module patron** le plus proche (ex. Spécialités → Services).
+2. **Chercher** routes, `action_key`, handlers, Actions domaine existants — ne pas dupliquer.
+3. Plan court : fichiers create / modify / reuse ; tests Feature prévus.
+
+## Pendant
+- Métier dans `app/Domain/<Module>/Actions/` uniquement.
+- Web **et** agent appellent les **mêmes** Actions.
+- Nouveau module agent → `AgentActionSeeder` + `config/agent.php` + `IntentRouter` + test Feature agent.
+- Policy + refus secrétaire (`assertForbidden`) obligatoires.
+
+## Avant de terminer (obligatoire)
+Exécuter :
+```bash
+composer qa
+```
+(`clinixora:verify` + tests PHPUnit)
+
+Si module agent ajouté ou catalogue incomplet :
+```bash
+composer sync-agent
+```
+
+## Anti-régressions
+- Ne pas laisser de liens `#` sur Paramètres si la route existe.
+- Ne pas oublier `DatabaseSeeder` / migration sync pour `agent_actions`.
+- Sous Windows : `composer dev:win` (pas `composer dev` — Pail/pcntl).

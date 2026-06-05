@@ -1,0 +1,22 @@
+---
+description: Checklist création module métier + agent Clinixora
+globs: app/Domain/**,app/Http/Controllers/**,app/Domain/Agent/**,database/migrations/**,database/seeders/**,routes/web.php,config/agent.php
+alwaysApply: false
+---
+
+# Nouveau module Clinixora
+
+Copier la structure d’un module existant (Spécialités / Services) :
+
+| Couche | Fichiers |
+|--------|----------|
+| DB | migration, Model, Factory, Seeder + `database/data/` |
+| Domain | Create/Update/Delete Action, QueryService |
+| HTTP | PageController, Controller, 2 FormRequests, Policy trait |
+| UI | `resources/views/<module>/`, `*-search.js`, enregistrer dans `app.js` |
+| Routes | `parametres/structure/...`, noms `module.*` |
+| Agent | 5 handlers (list/create/update/delete/search), IntentMatcher, entrées seeder |
+| Nav | `SettingsController` accès rapide + catégorie |
+| Tests | `*ManagementTest`, seeder test, 2–3 tests `AssistantChatTest` |
+
+Interdit : logique CRUD dans le handler agent sans Action domaine partagée.

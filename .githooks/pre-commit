@@ -1,0 +1,13 @@
+#!/bin/sh
+# Active avec : git config core.hooksPath .githooks
+
+echo "Clinixora pre-commit : vérification + tests…"
+
+php artisan clinixora:verify --no-ansi || {
+  echo "Échec clinixora:verify. Corrigez ou lancez : php artisan clinixora:verify --fix-agent"
+  exit 1
+}
+
+composer test --no-ansi || exit 1
+
+echo "OK"

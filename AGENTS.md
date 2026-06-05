@@ -29,3 +29,23 @@
 ## Langue
 
 - Documentation projet et commentaires utilisateur : **français** si utile à l’équipe.
+
+## Automatisation qualité (obligatoire avant de terminer)
+
+| Outil | Rôle |
+|-------|------|
+| `.cursor/rules/clinixora-workflow.mdc` | Protocole agent Cursor (toujours actif) |
+| `.cursor/rules/clinixora-new-module.mdc` | Checklist module métier + agent |
+| `.cursor/hooks.json` | Rappel `composer qa` après modifications |
+| `composer qa` | `clinixora:verify` + tests PHPUnit |
+| `composer sync-agent` | Resync `agent_actions` (modules assistant) |
+| `composer dev:win` | Serveur Laravel + Vite (Windows, sans Pail) |
+| `php artisan clinixora:verify --fix-agent` | Corrige un catalogue agent incomplet |
+| `.githooks/pre-commit` | QA au commit (`git config core.hooksPath .githooks`) |
+| `.github/workflows/qa.yml` | CI GitHub (verify + tests) |
+
+Commande unique après chaque session de dev :
+
+```bash
+composer qa
+```
